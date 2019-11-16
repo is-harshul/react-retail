@@ -12,16 +12,34 @@ code {
     monospace;
 }
 
-form{
-  width: 60%;
+#reg-form{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  color: white;
 }
 
+#reg-form h1{
+  color: white;
+  text-align: center;
+}
+
+#reg-form .form-group, #reg-form .btn{
+  width: 60%;
+  margin: auto;
+}
+#reg-form .btn{
+  margin-top: 20px;
+  background: #295f3b;
+  outline: #295f3b;
+}
 #form-container{
   width: 70%;
   margin: 70px auto;
   background-color: rgba(0, 0, 0, 0.4);
   padding: 5%;
   border-radius: 7px;
+  display: flex;
 }
 
 ul#navbar {
@@ -69,7 +87,7 @@ ul#navbar li a:hover {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: rgb(98, 171, 240);
+  background-color: #295f3b;
   color: white;
 }
 
@@ -81,6 +99,6 @@ ul#navbar li a:hover {
   margin-right: 40px;
   padding: 10px;
   outline: none;
-  border: 1px solid rgb(98, 171, 240);
+  border: 1.5px solid #295f3b;
   border-radius: 4px;
 }

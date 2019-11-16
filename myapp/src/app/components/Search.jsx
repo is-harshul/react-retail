@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { CometSpinLoader } from 'react-css-loaders';
+import { calculateAge } from '../utils/calculateAge';
+import { convertToDate } from '../utils/convertToDate.js';
+import { convertToDateTime } from '../utils/convertToDateTime';
 
 const Search = () => {
   const [users, setusers] = useState([]);
@@ -41,26 +44,33 @@ const Search = () => {
     <>
       <div className="search-body-container">
         <div id="heading-container">
-          <h2>Search a user : </h2>
+          <h2>Search a user</h2>
         </div>
         <div id="search-container">
           <input type="search" name="search-name" id="search-input-name" placeholder="Search by Name" onChange={e => { filterByName(e.target.value); setsearchNameValue(e.target.value) }} />
           <input type="search" name="search-number" id="search-input-number" placeholder="Search by Number" onChange={e => { filterByNumber(e.target.value); setsearchNumberValue(e.target.value) }} />
+        <br/>
+        <br/>
+        <br/>
+        <h2>Orders</h2>
         </div>
         <table id="users-table">
           <tr>
-            <th>S.no.</th>
             <th>Name</th>
             <th>Contact Number</th>
+            <th>Age (years)</th>
+            <th>Ordred on</th>
+            <th>Ordred at</th>
           </tr>
-        {isLoading ? <CometSpinLoader /> : ''}
+          {isLoading ? <CometSpinLoader /> : ''}
           {availableUsers.map((user, i) =>
             user.name.toLocaleLowerCase().startsWith(searchNameValue.toLocaleLowerCase()) && user.phone.startsWith(searchNumberValue) ? <tr key={user._id}>
-              <td>{i + 1}</td>
               <td>{user.name}</td>
               <td>{user.phone}</td>
+              <td>{calculateAge(convertToDate(user.dob))}</td>
+              <td>{convertToDateTime(user.createdAt).toDateString()}</td>
+              <td>{convertToDateTime(user.createdAt).toTimeString().substring(0, 5)} Hrs</td>
             </tr> : ''
-
           )}
         </table>
         <ol>
