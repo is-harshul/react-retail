@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import axios from "axios";
 import img from '../assets/ballpen-blur.jpg'
 import RetailModal from './atoms/RetailModal';
+import Alert from './atoms/RetailAlert';
 
 const Example = props => {
   const [name, setname] = useState("");
@@ -16,32 +17,30 @@ const Example = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (name === '' || phone === '' || dob === '' || orderAmount === '') {
+    console.log(phone.length);
+    if (name === '' || phone === '' || dob === '' || orderAmount === '' || phone.length !== 10 ) {
       setisFormComplete(false)
       return
-    }
-    else{
-      setformSuccess(true)
     }
     const ob = {
       payload: {
         name,
         dob,
         phone,
-        orderAmount
+        amount: orderAmount 
       }
     };
     axios
       .post("http://localhost:8080/api", ob)
-      .then(_ => console.log("Posted from AXIOS"))
-      .then(_ => { props.history.push('/search')})
+      .then(res => { ((res.status === 200 && res.data._id !== undefined) ? console.log("Posted from AXIOS with response =>", res) : console.log("Error from AXIOS, response =>", res)); return res; } )
+      .then(res => (res.status === 200 && res.data._id !== undefined) ? setformSuccess(true) : console.log("Some Error"))
+      // .then(_ => { props.history.push('/search')})
       .catch(err => console.log("Error from axios: ", err));
   };
   return (
     <div style={{ backgroundImage: `url(${img})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', padding: 20 }}>
       <section id="form-container">
-        {!isFormComplete && <RetailModal isOpen={!isFormComplete} color="warning" toggle={toggle} title="Fill all the fields" />}
-        {formSuccess && <RetailModal isOpen={!formSuccess} toggle={toggle} color="success" title="Successfully filled the data." />}
+        {!isFormComplete && <RetailModal isOpen={!isFormComplete} color="warning" toggle={toggle} title="Fill all fields correctly." />}
         <Form id='reg-form'>
           <h1>Enter your order details</h1>
           <br />
@@ -58,7 +57,7 @@ const Example = props => {
             />
           </FormGroup>
           <FormGroup>
-            <Label for="number">Phone Number</Label>
+            <Label for="number">Phone Number (10-digits)</Label>
             <Input
               className="formElements"
               type="number"
@@ -97,6 +96,7 @@ const Example = props => {
           <Button type="submit" onClick={handleSubmit}>
             Submit
           </Button>
+        {formSuccess && <Alert style={{margin: "20px auto", width: "80%", textAlign: "center" }} type="success" body="Successfully placed" /> }
         </Form>
       </section>
     </div>

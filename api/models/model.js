@@ -11,16 +11,16 @@ const Details = mongoose.Schema(
       required: true
     },
     phone: {
-      type: String, 
-      // unique : true,
-      dropDups: true,
-      validate: {
-        validator: function(v) {
-          return /\d{10}/.test(v);
-        },
-        message: props => `${props.value} is not a valid phone number!`
-      },
-      required: [true, "User phone number required"]
+      type: String,
+      // unique: false,
+      // dropDups: false,
+    //   validate: {
+    //     validator: function(v) {
+    //       return /\d{10}/.test(v);
+    //     },
+    //     message: props => `${props.value} is not a valid phone number!`
+    //   },
+    //   required: [true, "User phone number required"]
     },
     amount:{
       type: Number,

@@ -11,7 +11,7 @@ const RetailModal = (props) => {
     <div>
       <Modal isOpen={props.isOpen} toggle={props.toggle} className={className}>
         <ModalBody>
-          <h4>Fill all the fields.</h4>
+          <h4>{props.title}</h4>
         </ModalBody>
         <ModalFooter>
           <Button color={props.color} onClick={props.toggle} >Okay</Button>{' '}

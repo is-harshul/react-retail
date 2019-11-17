@@ -44,7 +44,7 @@ const Search = () => {
     <>
       <div className="search-body-container">
         <div id="heading-container">
-          <h2>Search a user</h2>
+          <h1>Search orders</h1>
         </div>
         <div id="search-container">
           <input type="search" name="search-name" id="search-input-name" placeholder="Search by Name" onChange={e => { filterByName(e.target.value); setsearchNameValue(e.target.value) }} />
@@ -52,24 +52,30 @@ const Search = () => {
         <br/>
         <br/>
         <br/>
-        <h2>Orders</h2>
+        </div>
+        <div id="table-heading-container">
+          <h2>Orders</h2>
         </div>
         <table id="users-table">
           <tr>
             <th>Name</th>
             <th>Contact Number</th>
-            <th>Age (years)</th>
-            <th>Ordred on</th>
-            <th>Ordred at</th>
+            {/* <th>Age (years)</th> */}
+            <th>Birthday</th>
+            <th>Ordered on</th>
+            <th>Ordered at</th>
+            <th>Ordered Amount (₹)</th>
           </tr>
           {isLoading ? <CometSpinLoader /> : ''}
           {availableUsers.map((user, i) =>
             user.name.toLocaleLowerCase().startsWith(searchNameValue.toLocaleLowerCase()) && user.phone.startsWith(searchNumberValue) ? <tr key={user._id}>
               <td>{user.name}</td>
               <td>{user.phone}</td>
-              <td>{calculateAge(convertToDate(user.dob))}</td>
+              {/* <td>{calculateAge(convertToDate(user.dob))}</td> */}
+              <td>{user.dob}</td>
               <td>{convertToDateTime(user.createdAt).toDateString()}</td>
               <td>{convertToDateTime(user.createdAt).toTimeString().substring(0, 5)} Hrs</td>
+              <td>₹{user.amount}</td>
             </tr> : ''
           )}
         </table>

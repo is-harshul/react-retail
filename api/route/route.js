@@ -15,6 +15,7 @@ router
     ob
       .save()
       .then(data => res.json(data))
+      .then(data => { console.log(data); return data; })
       .catch(err => res.json({ message: err }));
   });
 
