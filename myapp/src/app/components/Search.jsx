@@ -11,6 +11,7 @@ const Search = () => {
   const [availableUsers, setavailableUsers] = useState([])
   const [searchNameValue, setsearchNameValue] = useState('')
   const [searchNumberValue, setsearchNumberValue] = useState('')
+
   const getUsers = () => {
     axios
       .get("http://localhost:8080/api/")
@@ -47,7 +48,7 @@ const Search = () => {
           <h1>Search orders</h1>
         </div>
         <div id="search-container">
-          <input type="search" name="search-name" id="search-input-name" placeholder="Search by Name" onChange={e => { filterByName(e.target.value); setsearchNameValue(e.target.value) }} />
+          <input type="search" name="search-name" id="search-input-name" placeholder="Search by Name" onChange={e => { filterByName(e.target.value);  }} />
           <input type="search" name="search-number" id="search-input-number" placeholder="Search by Number" onChange={e => { filterByNumber(e.target.value); setsearchNumberValue(e.target.value) }} />
         <br/>
         <br/>
@@ -61,10 +62,10 @@ const Search = () => {
             <th>Name</th>
             <th>Contact Number</th>
             {/* <th>Age (years)</th> */}
-            <th>Birthday</th>
+            <th>Birthday (DD-MM-YYY)</th>
             <th>Ordered on</th>
             <th>Ordered at</th>
-            <th>Ordered Amount (₹)</th>
+            <th>Ordered Amount</th>
           </tr>
           {isLoading ? <CometSpinLoader /> : ''}
           {availableUsers.map((user, i) =>
@@ -72,10 +73,10 @@ const Search = () => {
               <td>{user.name}</td>
               <td>{user.phone}</td>
               {/* <td>{calculateAge(convertToDate(user.dob))}</td> */}
-              <td>{user.dob}</td>
+              <td>{(user.dob).toString().split('-').reverse().join('-')}</td>
               <td>{convertToDateTime(user.createdAt).toDateString()}</td>
               <td>{convertToDateTime(user.createdAt).toTimeString().substring(0, 5)} Hrs</td>
-              <td>₹{user.amount}</td>
+              <td>{user.amount}</td>
             </tr> : ''
           )}
         </table>

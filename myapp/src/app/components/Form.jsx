@@ -16,9 +16,9 @@ const Example = props => {
   const toggle = () => setisFormComplete(!isFormComplete);
 
   const handleSubmit = e => {
-    e.preventDefault();
+    // e.preventDefault();
     console.log(phone.length);
-    if (name === '' || phone === '' || dob === '' || orderAmount === '' || phone.length !== 10 ) {
+    if (name === '' || phone === '' || dob === '' || orderAmount === '') {
       setisFormComplete(false)
       return
     }
@@ -27,7 +27,7 @@ const Example = props => {
         name,
         dob,
         phone,
-        amount: orderAmount 
+        amount: orderAmount
       }
     };
     axios
@@ -57,7 +57,7 @@ const Example = props => {
             />
           </FormGroup>
           <FormGroup>
-            <Label for="number">Phone Number (10-digits)</Label>
+            <Label for="number">Phone Number</Label>
             <Input
               className="formElements"
               type="number"

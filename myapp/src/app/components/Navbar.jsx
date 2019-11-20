@@ -8,7 +8,7 @@ const Navbar = () => {
           <Link to="/">New Order</Link>
         </li>
         <li>
-          <Link to="/search">Search a user</Link>
+          <Link to="/search">Search customers</Link>
         </li>
       </ul>
     </>
