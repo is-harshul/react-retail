@@ -44,9 +44,9 @@ const Search = () => {
   return (
     <>
       <div className="search-body-container">
-        <div id="heading-container">
-          <h1>Search customers</h1>
-        </div>
+        {/* <div id="heading-container">
+          <h1>SEARCH CUSTOMERS</h1>
+        </div> */}
         <div id="search-container">
           <input type="search" name="search-name" id="search-input-name" placeholder="Search by Name" onChange={e => { filterByName(e.target.value); setsearchNameValue(e.target.value) }} />
           <input type="search" name="search-number" id="search-input-number" placeholder="Search by Number" onChange={e => { filterByNumber(e.target.value); setsearchNumberValue(e.target.value) }} />

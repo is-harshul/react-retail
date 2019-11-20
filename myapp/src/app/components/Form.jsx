@@ -42,7 +42,7 @@ const Example = props => {
       <section id="form-container">
         {!isFormComplete && <RetailModal isOpen={!isFormComplete} color="warning" toggle={toggle} title="Fill all fields correctly." />}
         <Form id='reg-form'>
-          <h1>Enter your order details</h1>
+          <h1>ENTER YOUR ORDER DETAILS</h1>
           <br />
           <FormGroup>
             <Label for="Name">Name</Label>

@@ -5,10 +5,10 @@ const Navbar = () => {
     <>
       <ul id="navbar">
         <li>
-          <Link to="/">New Order</Link>
+          <Link to="/">NEW ORDER</Link>
         </li>
         <li>
-          <Link to="/search">Search customers</Link>
+          <Link to="/search">SEARCH CUSTOMERS</Link>
         </li>
       </ul>
     </>
